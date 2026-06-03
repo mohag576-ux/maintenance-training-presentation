@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional To-Do List App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-tasks"></i> My Tasks</h1>
+                <p class="date-time" id="dateTime"></p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="task-input" 
+                        placeholder="Add a new task..."
+                        autocomplete="off"
+                    >
+                    <select id="prioritySelect" class="priority-select">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <button id="addBtn" class="add-btn">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+            </section>
+
+            <!-- Filter & Sort Section -->
+            <section class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list"></i> All
+                    </button>
+                    <button class="filter-btn" data-filter="active">
+                        <i class="fas fa-circle-notch"></i> Active
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        <i class="fas fa-check-circle"></i> Completed
+                    </button>
+                </div>
+                <div class="sort-buttons">
+                    <button class="sort-btn" id="sortPriority" title="Sort by Priority">
+                        <i class="fas fa-arrow-up"></i> Priority
+                    </button>
+                    <button class="sort-btn" id="sortDate" title="Sort by Date">
+                        <i class="fas fa-calendar"></i> Date
+                    </button>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <i class="fas fa-tasks"></i>
+                    <div>
+                        <h3 id="totalTasks">0</h3>
+                        <p>Total Tasks</p>
+                    </div>
+                </div>
+                <div class="stat-card active-stat">
+                    <i class="fas fa-circle-notch"></i>
+                    <div>
+                        <h3 id="activeTasks">0</h3>
+                        <p>Active</p>
+                    </div>
+                </div>
+                <div class="stat-card completed-stat">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h3 id="completedTasks">0</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                <div class="stat-card progress-stat">
+                    <i class="fas fa-percentage"></i>
+                    <div>
+                        <h3 id="progressPercent">0%</h3>
+                        <p>Progress</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <ul id="tasksList" class="tasks-list"></ul>
+                <div id="emptyState" class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <h2>No tasks yet</h2>
+                    <p>Add a new task to get started!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-actions">
+                <button id="clearCompletedBtn" class="footer-btn danger-btn" title="Delete completed tasks">
+                    <i class="fas fa-trash"></i> Clear Completed
+                </button>
+                <button id="clearAllBtn" class="footer-btn danger-btn" title="Delete all tasks">
+                    <i class="fas fa-broom"></i> Clear All
+                </button>
+                <button id="exportBtn" class="footer-btn success-btn" title="Export tasks">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+            <p class="footer-text">Data saved locally • <span id="lastSaved"></span></p>
+        </footer>
+    </div>
+
+    <!-- Modal for editing -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Task</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="editInput" class="edit-input" placeholder="Edit task...">
+                <select id="editPriority" class="priority-select">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelBtn" class="modal-btn cancel-btn">Cancel</button>
+                <button id="saveBtn" class="modal-btn save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
